@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ITM-001",
+    "name": "RAM 8GB DDR4",
+    "category": "Memory",
+    "quantity": 25,
+    "price": 45,
+    "status": "in-stock",
+    "dateAdded": "2024-01-15"
+  },
+  {
+    "id": "ITM-002",
+    "name": "SSD 500GB",
+    "category": "Storage",
+    "quantity": 5,
+    "price": 75,
+    "status": "low-stock",
+    "dateAdded": "2024-01-10"
+  },
+  {
+    "id": "ITM-003",
+    "name": "Graphics Card GTX 1660",
+    "category": "GPU",
+    "quantity": 0,
+    "price": 250,
+    "status": "out-of-stock",
+    "dateAdded": "2024-01-05"
+  },
+  {
+    "id": "ITM-004",
+    "name": "nnnn",
+    "category": "GPU",
+    "quantity": 2,
+    "price": 0.06,
+    "status": "low-stock",
+    "dateAdded": "2025-05-30"
+  }
+]

@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Request - Dern-Support</title>
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 10, 10, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+
+        /* Main Content */
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .request-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Content Sections */
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Cost Calculator */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .cost-summary {
+            background: linear-gradient(135deg, #2c3e50 0%, #3a5998 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            height: fit-content;
+        }
+
+        .cost-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cost-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-top: 2px solid rgba(255,255,255,0.3);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Tables */
+        .requests-section {
+            margin-top: 4rem;
+        }
+
+        .requests-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .table-container h3 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending, .status-low {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-medium {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-high, .status-urgent {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-resolved, .status-completed, .status-done {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-in-progress {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            text-align: center;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-row,
+            .calculator-grid,
+            .requests-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .request-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .quote-form-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+
+        .calculator-grid .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .calculator-grid .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .calculator-grid .form-group input,
+        .calculator-grid .form-group select,
+        .calculator-grid .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .calculator-grid .form-group input:focus,
+        .calculator-grid .form-group select:focus,
+        .calculator-grid .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Dern-Support</div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/knowledge">Knowledge Base</a></li>
+                <li><a href="/user/individual-support">Individual Support</a></li>
+                <li><a href="/user/business-support">Business Support</a></li>
+                <li><a href="/user/submit-request" class="active">Send Request</a></li>
+                <li><a href="/user/dashboard">Dashboard</a></li>
+                <% if (user) { %>
+                    <li><a href="/user/dashboard">Dashboard</a></li>
+                    <li><a href="/auth/logout">Logout</a></li>
+                <% } else { %>
+                    <li><a href="/auth/login">Login</a></li>
+                    <li><a href="/auth/register">Register</a></li>
+                <% } %>
+            </ul>
+            <div class="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <div class="page-header">
+            <h1>Send Request</h1>
+        </div>
+
+        <% if (error) { %>
+            <div class="error-message">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <!-- Request Type Tabs -->
+        <div class="request-tabs">
+            <button class="tab-button active" onclick="showTab('simple')">Submit Request</button>
+            <button class="tab-button" onclick="showTab('quote')">Get Instant Quote</button>
+        </div>
+
+        <!-- Simple Request Form -->
+        <div id="simple" class="form-container active">
+            <h2 style="margin-bottom: 2rem; color: #2c3e50;">Submit Support Request</h2>
+            <form action="/user/submit-request" method="POST">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="deviceType">Device Type *</label>
+                        <select id="deviceType" name="requestType" required>
+                            <option value="">Select device type</option>
+                            <option value="desktop" <%= formData.requestType === 'desktop' ? 'selected' : '' %>>Desktop Computer</option>
+                            <option value="laptop" <%= formData.requestType === 'laptop' ? 'selected' : '' %>>Laptop</option>
+                            <option value="tablet" <%= formData.requestType === 'tablet' ? 'selected' : '' %>>Tablet</option>
+                            <option value="smartphone" <%= formData.requestType === 'smartphone' ? 'selected' : '' %>>Smartphone</option>
+                            <option value="printer" <%= formData.requestType === 'printer' ? 'selected' : '' %>>Printer</option>
+                            <option value="network" <%= formData.requestType === 'network' ? 'selected' : '' %>>Network Equipment</option>
+                            <option value="server" <%= formData.requestType === 'server' ? 'selected' : '' %>>Server</option>
+                            <option value="other" <%= formData.requestType === 'other' ? 'selected' : '' %>>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="urgencyLevel">Urgency Level</label>
+                        <select id="urgencyLevel" name="priority">
+                            <option value="low" <%= formData.priority === 'low' ? 'selected' : '' %>>Low - Within 1 week</option>
+                            <option value="medium" <%= formData.priority === 'medium' ? 'selected' : '' %>>Medium - Within 24 hours</option>
+                            <option value="high" <%= formData.priority === 'high' ? 'selected' : '' %>>High - Within 4 hours</option>
+                            <option value="urgent" <%= formData.priority === 'urgent' ? 'selected' : '' %>>Critical - Immediate</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="issueDescription">Issue Description *</label>
+                    <textarea id="issueDescription" name="description" placeholder="Please describe the issue in detail..." required><%= formData.description || '' %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceLocation">Service Location</label>
+                    <select id="serviceLocation" name="serviceLocation">
+                        <option value="dropoff" <%= formData.serviceLocation === 'dropoff' ? 'selected' : '' %>>Drop-off at service center</option>
+                        <option value="onsite" <%= formData.serviceLocation === 'onsite' ? 'selected' : '' %>>On-site service</option>
+                        <option value="remote" <%= formData.serviceLocation === 'remote' ? 'selected' : '' %>>Remote support</option>
+                        <option value="mail" <%= formData.serviceLocation === 'mail' ? 'selected' : '' %>>Mail-in service</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                    Submit Support Request
+                </button>
+            </form>
+        </div>
+
+        <!-- Quote Calculator -->
+        <div id="quote" class="form-container">
+            <h2 style="margin-bottom: 2rem; color: #2c3e50;">Get Instant Quote</h2>
+            <div class="calculator-grid">
+                <div class="quote-form-section">
+                    <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">Service Details</h3>
+                    <form id="quoteForm">
+                        <div class="form-group">
+                            <label for="serviceType">Service Type *</label>
+                            <select id="serviceType" onchange="updateCost()" required>
+                                <option value="">Select service</option>
+                                <option value="virus-removal" data-cost="80">Virus Removal - $80</option>
+                                <option value="data-recovery" data-cost="300">Data Recovery - $300</option>
+                                <option value="hardware-repair" data-cost="150">Hardware Repair - $150</option>
+                                <option value="network-setup" data-cost="120">Network Setup - $120</option>
+                                <option value="software-installation" data-cost="60">Software Installation - $60</option>
+                                <option value="system-optimization" data-cost="90">System Optimization - $90</option>
+                                <option value="backup-setup" data-cost="100">Backup Setup - $100</option>
+                                <option value="email-setup" data-cost="50">Email Setup - $50</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="quoteUrgency">Urgency Level</label>
+                            <select id="quoteUrgency" onchange="updateCost()">
+                                <option value="standard" data-cost="0">Standard (3-5 days) - No extra charge</option>
+                                <option value="express" data-cost="25">Express (1-2 days) - +$25</option>
+                                <option value="same-day" data-cost="50">Same Day - +$50</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="cost-summary">
+                    <h3><i class="fas fa-calculator"></i> Estimated Cost</h3>
+                    <div class="cost-item">
+                        <span>Service Fee:</span>
+                        <span id="serviceFee">$0.00</span>
+                    </div>
+                    <div class="cost-item">
+                        <span>Urgency Fee:</span>
+                        <span id="urgencyFee">$0.00</span>
+                    </div>
+                    <div class="cost-item cost-total">
+                        <span>Total:</span>
+                        <span id="totalCost">$0.00</span>
+                    </div>
+                    <button type="button" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;" onclick="bookService()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Book This Service
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Requests Section -->
+        <% if (user) { %>
+        <div class="requests-section">
+            <div class="requests-grid">
+                <!-- My Requests -->
+                <div class="table-container">
+                    <h3><i class="fas fa-clipboard-list"></i> My Support Requests</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Device</th>
+                                <th>Issue</th>
+                                <th>Urgency</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (requests && requests.length > 0) { %>
+                                <% requests.forEach(request => { %>
+                                    <tr>
+                                        <td><%= request.requestType %></td>
+                                        <td><%= request.description.substring(0, 50) %>...</td>
+                                        <td><span class="status-badge status-<%= request.priority %>"><%= request.priority %></span></td>
+                                        <td><span class="status-badge status-<%= request.status %>"><%= request.status %></span></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: #666; padding: 2rem;">
+                                        No requests submitted yet
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- My Quotes -->
+                <div class="table-container">
+                    <h3><i class="fas fa-receipt"></i> My Service Quotes</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Urgency</th>
+                                <th>Cost</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (quotes && quotes.length > 0) { %>
+                                <% quotes.forEach(quote => { %>
+                                    <tr>
+                                        <td><%= quote.serviceType.replace('-', ' ') %></td>
+                                        <td><%= quote.urgency %></td>
+                                        <td>$<%= quote.totalCost %></td>
+                                        <td><span class="status-badge status-<%= quote.status %>"><%= quote.status %></span></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: #666; padding: 2rem;">
+                                        No quotes generated yet
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>📧 info@dern-support.com</p>
+                    <p>📞 (555) 123-4567</p>
+                    <p>📍 123 Tech Street, Digital City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#">Computer Repair</a></p>
+                    <p><a href="#">On-site Support</a></p>
+                    <p><a href="#">Data Recovery</a></p>
+                    <p><a href="#">Network Setup</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday - Friday: 8AM - 6PM</p>
+                    <p>Saturday: 9AM - 4PM</p>
+                    <p>Sunday: Emergency only</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dern-Support. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+       // Mobile Navigation
+       const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-menu');
+
+burger.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    burger.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        burger.classList.remove('active');
+    });
+});
+
+
+
+
+
+
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Hide all content sections
+            document.querySelectorAll('.form-container').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected content section
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Cost Calculator
+        function updateCost() {
+            const serviceSelect = document.getElementById('serviceType');
+            const urgencySelect = document.getElementById('quoteUrgency');
+            
+            const serviceCost = parseFloat(serviceSelect.selectedOptions[0]?.dataset.cost || 0);
+            const urgencyCost = parseFloat(urgencySelect.selectedOptions[0]?.dataset.cost || 0);
+            
+            const totalCost = serviceCost + urgencyCost;
+            
+            document.getElementById('serviceFee').textContent = `$${serviceCost.toFixed(2)}`;
+            document.getElementById('urgencyFee').textContent = `$${urgencyCost.toFixed(2)}`;
+            document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
+        }
+
+        // Book Service
+        async function bookService() {
+            const serviceSelect = document.getElementById('serviceType');
+            const urgencySelect = document.getElementById('quoteUrgency');
+            
+            if (!serviceSelect.value) {
+                alert('Please select a service type first.');
+                return;
+            }
+
+
+            
+            const serviceData = {
+                serviceType: serviceSelect.value,
+                serviceName: serviceSelect.selectedOptions[0].text,
+                urgency: urgencySelect.value,
+                urgencyName: urgencySelect.selectedOptions[0].text,
+                serviceFee: parseFloat(serviceSelect.selectedOptions[0].dataset.cost || 0),
+                urgencyFee: parseFloat(urgencySelect.selectedOptions[0].dataset.cost || 0),
+                totalCost: parseFloat(serviceSelect.selectedOptions[0].dataset.cost || 0) + parseFloat(urgencySelect.selectedOptions[0].dataset.cost || 0)
+            };
+
+            try {
+                const response = await fetch('/user/book-service', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(serviceData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`Service booked successfully!\n\nService: ${serviceData.serviceName}\nUrgency: ${serviceData.urgencyName}\nTotal Cost: $${serviceData.totalCost.toFixed(2)}\n\nWe will contact you within 24 hours to schedule your service.`);
+                    
+                    // Reset form
+                    document.getElementById('quoteForm').reset();
+                    updateCost();
+                    
+                    // Reload page to show updated quotes
+                    window.location.reload();
+                } else {
+                    alert('Failed to book service: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error booking service:', error);
+                alert('An error occurred while booking the service.');
+            }
+        }
+
+        // Initialize cost calculator
+        updateCost();
+
+        // Form validation enhancement
+        document.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(231, 76, 60)') {
+                    this.style.borderColor = '#e9ecef';
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1748556826633",
+    "name": "Feruzbek",
+    "email": "frushanov06@gmali.com",
+    "password": "$2b$10$XH3XCA/G5M9mKzOOAQl1Iu8znK53slL5cWkN5hPhrFkMDpfqOtlgG",
+    "phone": "+998937228787",
+    "userType": "individual",
+    "registrationDate": "2025-05-29",
+    "status": "active"
+  },
+  {
+    "id": "1748566151114",
+    "name": "1",
+    "email": "1@1",
+    "password": "$2b$10$WKGBheICqR.Cd12AvXqXLunEAs3qZaCg7g45apfJ7tXq75oyQ.2.e",
+    "phone": "1",
+    "userType": "individual",
+    "registrationDate": "2025-05-30",
+    "status": "active"
+  },
+  {
+    "id": "1748579208004",
+    "name": "ihhbedhb",
+    "email": "nasriddinbek1@gmail.com",
+    "password": "$2b$10$6Zq7dwv8iADNjF3aUZ5m2.ixVqogtlS6kO8l02pPu25yu2dVC7ZIy",
+    "phone": "2342352245",
+    "userType": "business",
+    "registrationDate": "2025-05-30",
+    "status": "active"
+  },
+  {
+    "id": "1748594835784",
+    "name": "nasriddinbek",
+    "email": "nasriddinbek9@gmail.com",
+    "password": "$2b$10$c3eREj99ww.6wUxBulXwce7paohAz8QNRa0cHN1EOsOZz0Uc3GzbO",
+    "phone": "2342352245",
+    "userType": "individual",
+    "registrationDate": "2025-05-30",
+    "status": "active"
+  }
+]

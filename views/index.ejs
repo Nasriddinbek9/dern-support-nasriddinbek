@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dern-Support - Professional IT Support Services</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    
+
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Dern-Support</div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/user/knowledge">Knowledge Base</a></li>
+                    <li><a href="/user/individual-support">Individual Support</a></li>
+                    <li><a href="/user/business-support">Business Support</a></li>
+                    <li><a href="/user/submit-request">Send request</a></li>
+                    <% if (user) { %>
+                        <li><a href="/user/dashboard">Dashboard</a></li>
+                        <li><a href="/auth/logout">Logout</a></li>
+                    <% } else { %>
+                        <li><a href="/auth/login">Login</a></li>
+                        <li><a href="/auth/register">Register</a></li>
+                    <% } %>
+                </ul>
+                <div class="burger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </nav>
+
+
+
+   <!-- Home Page -->
+   <div id="home" class="page-content active">
+    <!-- Hero Section -->
+    <section class="hero" style="margin-top: -50px;">
+        <div class="hero-content">
+            <h1>Professional IT Support Solutions</h1>
+            <p>Expert computer repair and technical support for businesses and individuals. Fast, reliable, and professional service you can trust.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" onclick="showPage('business')">Business Support</a>
+                <a href="#" class="btn btn-secondary" onclick="showPage('individual')">Individual Support</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Client Logos -->
+        <section class="clients">
+            <div class="container">
+                <h2>Trusted by Leading Companies</h2>
+                <div class="logos-grid">
+                    <div class="logo-item" ><img src="https://api.logobank.uz/media/logos_png/Uzum_Tezkor-01.png" alt="" style="width: 100%; height: 100%;"></div>
+
+                    <div class="logo-item" ><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Dell_logo_2016.svg/1200px-Dell_logo_2016.svg.png" alt="" style="width: 100%; height: 100%;"></div>
+
+
+                    <div class="logo-item" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ58f__Hs5QwGWIEcsawDwW1o5IQzaYNPONhQ&s" alt="" style="width: 100%; height: 100%;"></div>
+                    
+                    <div class="logo-item" ><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaAx4OMNKDO78w1GtSY9IKw8zy3RPjRMbWyg&s" alt="" style="width: 100%; height: 100%;"></div>
+
+                    <div class="logo-item" ><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Regus_logo15.png" alt="" style="width: 100%; height: 100%;"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Advantages -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Dern-Support?</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-clock-rotate-left" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>Fast Response Time</h3>
+                        <p>Same-day service for urgent issues. We understand that downtime costs money, so we prioritize quick resolution of your technical problems.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-user-gear" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>Expert Technicians</h3>
+                        <p>Certified professionals with years of experience in computer repair and IT support. Our team stays updated with the latest technology trends.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-building-user" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>On-Site Business Support</h3>
+                        <p>Convenient on-site support for business customers. We come to your location to minimize disruption to your operations.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-receipt" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>Transparent Pricing</h3>
+                        <p>Clear, upfront quotes with no hidden fees. You'll know exactly what you're paying for before we start any work.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-shield-halved" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>Data Security</h3>
+                        <p>Your data privacy and security is our top priority. We follow strict protocols to protect your sensitive information.</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="icon"><i class="fas fa-face-smile" style="font-size: 48px; color: #3c82f6;"></i></div>
+                        <h3>Customer Satisfaction</h3>
+                        <p>Over 95% customer satisfaction rate. We don't just fix problems – we build lasting relationships with our clients.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p> info@dern-support.com</p>
+                    <p> (555) 123-4567</p>
+                    <p> 123 Tech Street, Digital City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#">Computer Repair</a></p>
+                    <p><a href="#">On-site Support</a></p>
+                    <p><a href="#">Data Recovery</a></p>
+                    <p><a href="#">Network Setup</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday - Friday: 8AM - 6PM</p>
+                    <p>Saturday: 9AM - 4PM</p>
+                    <p>Sunday: Emergency only</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dern-Support. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 10, 10, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .advantage-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: slideUp 1s ease forwards 0.5s;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: #ccc;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideUp 1s ease forwards 0.7s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: slideUp 1s ease forwards 0.9s;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Main Content */
+.main-content {
+    background: #fff;
+    min-height: 100vh;
+}
+
+.section {
+    padding: 5rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 2px;
+}
+
+/* Client Logos */
+.clients {
+    background: #f8f9fa;
+    padding: 3rem 0;
+}
+
+.clients h2 {
+    text-align: center;
+    color: #666;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    align-items: center;
+}
+
+.logo-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    font-weight: bold;
+    color: #333;
+}
+
+.logo-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Advantages Cards */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.advantage-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.advantage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+}
+
+.advantage-card .icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #667eea;
+}
+
+.advantage-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.advantage-card p {
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Page Content */
+.page-content {
+    display: block;
+    padding: 8rem 0 5rem;
+    background: #fff;
+    min-height: 100vh;
+}
+
+.page-content.active {
+    display: block;
+}
+
+    </style>
+
+
+<script>
+    // Mobile Navigation
+    const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-menu');
+
+burger.addEventListener('click', () => {
+nav.classList.toggle('active');
+burger.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+link.addEventListener('click', () => {
+    nav.classList.remove('active');
+    burger.classList.remove('active');
+});
+});
+</script>
+</body>
+</html>

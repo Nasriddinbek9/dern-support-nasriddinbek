@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base - Dern-Support</title>
+    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">Dern-Support</div>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/user/knowledge">Knowledge Base</a></li>
+                    <li><a href="/user/individual-support">Individual Support</a></li>
+                    <li><a href="/user/business-support">Business Support</a></li>
+                    <li><a href="/user/submit-request">Send request</a></li>
+                    <% if (user) { %>
+                        <li><a href="/user/dashboard">Dashboard</a></li>
+                        <li><a href="/auth/logout">Logout</a></li>
+                    <% } else { %>
+                        <li><a href="/auth/login">Login</a></li>
+                        <li><a href="/auth/register">Register</a></li>
+                    <% } %>
+                </ul>
+                <div class="burger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Knowledge Base Page -->
+        <div id="knowledge" class="page-content">
+            <div class="container">
+                <br> <br> <br>
+                <h2 class="section-title" style="text-align: center;">Knowledge Base</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem;">Find solutions to common IT problems and learn how to fix minor issues yourself.</p>
+                
+                <div class="knowledge-base cards">
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://i.pcmag.com/imagery/roundups/03vMLiY0vu25u3uAUqohe98-1..v1569492680.jpg" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Data Recovery</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">If you accidentally deleted a file, don’t panic. First, check your Recycle Bin. If it’s not there, try free recovery tools like Recuva or EaseUS. For best results, stop using the drive immediately to avoid overwriting lost data.
+                        </p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://www.man-sys.co.uk/wp-content/uploads/2019/12/computer-maintenance.png" alt="Blog Name" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Maintenance Tips</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">To keep your computer working well, clean up old files, uninstall programs you don’t use, and restart it often. Also, install system updates regularly — they fix bugs and improve performance.</p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://nahil.com.sa/wp-content/uploads/2024/12/%D8%AA%D9%88%D8%A7%D8%AC%D9%87-%D8%A8%D8%B7%D8%A1-%D9%81%D9%8A-%D8%AC%D9%87%D8%A7%D8%B2-%D8%A7%D9%84%D9%83%D9%85%D8%A8%D9%8A%D9%88%D8%AA%D8%B1%D8%9F-%D8%A5%D9%84%D9%8A%D9%83-%D8%A7%D9%84%D8%AD%D9%84-1024x569.jpg" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Slow Computer Performance</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">A slow computer usually means too many apps running, low memory, or even a virus. Close extra programs, run a virus scan, and check if your disk is almost full. Restarting your device also helps.</p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://www.australiancomputertraders.com.au/assets/images/Windows%20BSOD%20Image.jpg" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Blue Screen Errors (BSOD)</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">A blue screen usually means your computer had a serious error. Write down the error code, then search what it means. Often it’s caused by a driver issue or a hardware problem. Restart and check for updates.</p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://getquicktech.com.au/wp-content/uploads/2020/09/Peripheral-Setup-Troubleshoot-and-Repair_01.jpg" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Printer & Peripheral Setup</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">Make sure your printer or device is connected properly. Then install the right driver from the company’s website. If it still doesn’t work, try restarting both your PC and the printer.</p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                    <div class="kb-category">
+                        <div class="card-top">
+                            <img src="https://i.pcmag.com/imagery/roundups/00IBj7QgR0HtuwfikyDdyTq-12..v1616705579.png" alt="Blog Name">
+                        </div>
+                        <div class="card-info">
+                        <h3>Backup Solutions</h3>
+                        <span class="date">Monday, Jan 20, 2021</span>
+                        <p class="excerpt">Backing up means saving a copy of your important files. You can use a USB drive, an external hard disk, or cloud storage like Google Drive. This way, even if your device breaks, your data stays safe.</p>
+                        </div>
+                        <div class="card-bottom flex-row">
+                            <a href="#" class="read-more">Watch Full Blog</a>
+                            <a href="#" class="button btn-yellow">Channel</a>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+
+
+            <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p> info@dern-support.com</p>
+                    <p> (555) 123-4567</p>
+                    <p> 123 Tech Street, Digital City</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p><a href="#">Computer Repair</a></p>
+                    <p><a href="#">On-site Support</a></p>
+                    <p><a href="#">Data Recovery</a></p>
+                    <p><a href="#">Network Setup</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Business Hours</h3>
+                    <p>Monday - Friday: 8AM - 6PM</p>
+                    <p>Saturday: 9AM - 4PM</p>
+                    <p>Sunday: Emergency only</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Dern-Support. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1rem;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 10, 10, 0.95);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .burger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .burger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .burger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .advantage-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+
+
+
+
+.knowledge-base {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
+  margin: 20px 0;
+  padding: 0 200px;
+}
+.card-top img {
+  display: block;
+  width: 100%;
+}
+
+.kb-category {
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 20%);
+}
+.card-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden;
+}
+.card-info h2 {
+  font-size: 18px;
+  margin: 10px 0 5px 0;
+}
+.date {
+  margin-bottom: 10px;
+}
+.card-info span,p {
+  font-size: 15px;
+  display: block;
+}
+.excerpt {
+  color: #aeaeae;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-bottom {
+  margin-top: 20px;
+}
+.button {
+  text-decoration: unset;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #4e4e4e;
+  width: 80px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 30px;
+  border-radius: 5px;
+  background: #f2f4f6;
+}
+.read-more {
+  text-decoration: unset;
+  color: #000;
+  font-weight: 600;
+}
+.btn-yellow {
+  background: #ffb91d;
+}
+    </style>
+
+
+<script>
+    // Mobile Navigation
+    const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-menu');
+
+burger.addEventListener('click', () => {
+nav.classList.toggle('active');
+burger.classList.toggle('active');
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+link.addEventListener('click', () => {
+    nav.classList.remove('active');
+    burger.classList.remove('active');
+});
+});
+
+
+
+
+
+
+
+    // Add search functionality to knowledge base
+    function addSearchToKnowledgeBase() {
+        const knowledgePage = document.getElementById('knowledge');
+        const container = knowledgePage.querySelector('.container');
+        
+        const searchHTML = `
+            <div style="max-width: 500px; margin: 0 auto 3rem; position: relative;">
+                <input type="text" id="kb-search" placeholder="Search knowledge base..." 
+                       style="width: 100%; padding: 1rem 3rem 1rem 1rem; border: 2px solid #e9ecef; 
+                              border-radius: 50px; font-size: 1rem; transition: all 0.3s ease;">
+                <div style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); 
+                            color: #666; font-size: 1.2rem;"></div>
+            </div>
+        `;
+        
+        const titleElement = container.querySelector('.section-title');
+        titleElement.insertAdjacentHTML('afterend', searchHTML);
+        
+        // Add search functionality
+        const searchInput = document.getElementById('kb-search');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const categories = document.querySelectorAll('.kb-category');
+            
+            categories.forEach(category => {
+                const card_info = category.querySelector('.card-info')
+                const title = card_info.querySelector('h3').textContent.toLowerCase();
+                const content = card_info.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || content.includes(searchTerm) || searchTerm === '') {
+                    category.style.display = 'block';
+                    category.style.opacity = '1';
+                } else {
+                    category.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Initialize search functionality when knowledge base page is shown
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     // Add search to knowledge base after a short delay to ensure DOM is ready
+    //     setTimeout(addSearchToKnowledgeBase, 100);
+    // });
+    addSearchToKnowledgeBase()
+</script>
+</body>
+</html>

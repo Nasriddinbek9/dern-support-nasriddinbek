@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks - Dern-Support Master</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="master-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-tools"></i> Dern-Support</h2>
+                <p>Master Panel</p>
+            </div>
+            <div class="master-info">
+                <div class="master-avatar">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="master-details">
+                    <h3><%= user.name %></h3>
+                    <p>Technician</p>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="/master/tasks">
+                        <i class="fas fa-tasks"></i>
+                        <span>My Tasks</span>
+                    </a>
+                </li>
+                <li class="logout">
+                    <a href="/auth/logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>My Tasks</h1>
+                <div class="user-info">
+                    <span>Welcome, <%= user.name %></span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <div class="page-content">
+                <!-- Status Filter Buttons -->
+                <div class="filter-section">
+                    <button class="filter-btn active" onclick="filterTasks('all')">All Tasks</button>
+                    <button class="filter-btn" onclick="filterTasks('in-progress')">In Progress</button>
+                    <button class="filter-btn" onclick="filterTasks('done')">Done</button>
+                    <button class="filter-btn" onclick="filterTasks('delay')">Delayed</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Request ID</th>
+                                <th>Type</th>
+                                <th>User/Business</th>
+                                <th>Description</th>
+                                <th>Urgency</th>
+                                <th>Status</th>
+                                <th>Date Assigned</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasksTable">
+                            <% if (requests.length > 0 || quotes.length > 0) { %>
+                                <% requests.forEach(request => { %>
+                                    <tr data-request-id="<%= request.id %>" data-type="request" data-status="<%= request.status %>">
+                                        <td>#SR-<%= request.id.slice(-6) %></td>
+                                        <td>Support</td>
+                                        <td><%= request.userName %></td>
+                                        <td><%= request.description.substring(0, 50) %>...</td>
+                                        <td><span class="priority <%= request.priority %>"><%= request.priority %></span></td>
+                                        <td><span class="status <%= request.status %>"><%= request.status %></span></td>
+                                        <td><%= request.updatedDate %></td>
+                                        <td>
+                                            <button class="btn-change" onclick="openChangeModal('<%= request.id %>', 'request', '<%= request.status %>')">Change Status</button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                                <% quotes.forEach(quote => { %>
+                                    <tr data-request-id="<%= quote.id %>" data-type="quote" data-status="<%= quote.status %>">
+                                        <td>#QR-<%= quote.id.slice(-6) %></td>
+                                        <td>Quote</td>
+                                        <td><%= quote.userName %></td>
+                                        <td><%= quote.serviceName %></td>
+                                        <td><span class="priority <%= quote.urgency %>"><%= quote.urgency %></span></td>
+                                        <td><span class="status <%= quote.status %>"><%= quote.status %></span></td>
+                                        <td><%= quote.updatedDate %></td>
+                                        <td>
+                                            <button class="btn-change" onclick="openChangeModal('<%= quote.id %>', 'quote', '<%= quote.status %>')">Change Status</button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="8" class="empty-message">No tasks assigned to you yet.</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Change Status Modal -->
+    <div id="changeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Task Status</h2>
+                <span class="close" onclick="closeChangeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="changeStatusForm">
+                    <div class="form-group">
+                        <label for="statusSelect">Status:</label>
+                        <select id="statusSelect">
+                            <option value="in-progress">In Progress</option>
+                            <option value="done">Done</option>
+                            <option value="delay">Delay</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="statusNotes">Notes (optional):</label>
+                        <textarea id="statusNotes" rows="3" placeholder="Add any notes about this status change..."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-submit" onclick="submitStatusChange()">Update Status</button>
+                        <button type="button" class="btn-cancel" onclick="closeChangeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentRequestId = null;
+        let currentType = null;
+
+        function openChangeModal(requestId, type, currentStatus) {
+            currentRequestId = requestId;
+            currentType = type;
+            document.getElementById('statusSelect').value = currentStatus;
+            document.getElementById('changeModal').style.display = 'block';
+        }
+
+        function closeChangeModal() {
+            document.getElementById('changeModal').style.display = 'none';
+            document.getElementById('statusNotes').value = '';
+            currentRequestId = null;
+            currentType = null;
+        }
+
+        async function submitStatusChange() {
+            const status = document.getElementById('statusSelect').value;
+            const notes = document.getElementById('statusNotes').value;
+            
+            if (!currentRequestId || !currentType) {
+                alert('Error: No request selected');
+                return;
+            }
+            
+            try {
+                console.log('Updating status:', { currentRequestId, currentType, status, notes });
+                
+                const response = await fetch(`/master/${currentType}/${currentRequestId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status, notes })
+                });
+                
+                const result = await response.json();
+                console.log('Response:', result);
+                
+                if (response.ok && result.success) {
+                    alert('Status updated successfully!');
+                    closeChangeModal();
+                    location.reload();
+                } else {
+                    alert('Failed to update status: ' + (result.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                alert('Network error occurred while updating the status.');
+            }
+        }
+
+        // Filter tasks by status
+        function filterTasks(status) {
+            const rows = document.querySelectorAll('#tasksTable tr[data-status]');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Update active filter button
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide rows based on filter
+            rows.forEach(row => {
+                if (status === 'all' || row.dataset.status === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('changeModal');
+            if (event.target === modal) {
+                closeChangeModal();
+            }
+        }
+    </script>
+
+    <style>
+        /* Master Panel Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .master-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .master-info {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .master-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.5rem;
+        }
+
+        .master-details h3 {
+            margin-bottom: 5px;
+        }
+
+        .master-details p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu li.active a {
+            background-color: #3498db;
+        }
+
+        .sidebar-menu i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            background-color: #f8f9fa;
+        }
+
+        .content-header {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-content {
+            padding: 30px;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #e9ecef;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status, .priority {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status.in-progress {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status.done {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status.delay {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .priority.low {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .priority.medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .priority.high {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .priority.urgent {
+            background-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .btn-change {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-change:hover {
+            background: #2980b9;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #666;
+            padding: 2rem;
+            font-style: italic;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-submit {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background: #2980b9;
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #5a6268;
+        }
+    </style>
+</body>
+</html>
